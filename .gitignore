@@ -33,5 +33,11 @@ build/
 .vscode/
 .idea/
 out/
-
+settings.gradle.kts/
+gradlew/
+gradle.properties/
+.gradle/
+gradle/
+build.gradle.kts/
+gradlew.bat/
 
