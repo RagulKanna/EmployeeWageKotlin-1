@@ -16,35 +16,39 @@ class FullTimeEmployee() {
     constructor(WAGE_PER_HOUR: Int, FULL_DAY_HOUR: Int, NO_OF_DAYS: Int) : this() {
         val isPresent: Int = 1
         val isAbsent: Int = 0
+        val totalHours = 100
+
         println("\nFull Time Employee Wage \n\nThe daily wage of employee is ${calculateDailyWage(WAGE_PER_HOUR, FULL_DAY_HOUR)}")
-        displayPresentOrAbsentWithDailyWage(isAbsent, isPresent ,WAGE_PER_HOUR, NO_OF_DAYS)
+        displayPresentOrAbsentWithDailyWage(isAbsent, isPresent ,WAGE_PER_HOUR, NO_OF_DAYS, totalHours)
     }
 
     private fun checkPresentOrAbsent(isAbsent: Int, isPresent: Int): Int {
             return (isAbsent..isPresent).random()
     }
 
-    private fun displayPresentOrAbsentWithDailyWage(isAbsent: Int, isPresent: Int, WAGE_PER_HOUR: Int, NO_OF_DAYS: Int) {
+    private fun displayPresentOrAbsentWithDailyWage(isAbsent: Int, isPresent: Int, WAGE_PER_HOUR: Int, NO_OF_DAYS: Int, totalHours: Int) {
         var days: Int = 1
         var monthlyWage: Int = 0
-        while (days <= NO_OF_DAYS) {
-            println("Day $days:")
+        var hours: Int = 0
+        while (days <= NO_OF_DAYS && hours <= totalHours) {
+            println("\nDay $days:")
             if (checkPresentOrAbsent(isAbsent, isPresent) == 0) {
                 val fullDayHour: Int = 0
                 println("\nFull Time Employee Is Absent")
-                var dailyWage = calculateDailyWage(WAGE_PER_HOUR, fullDayHour)
+                val dailyWage = calculateDailyWage(WAGE_PER_HOUR, fullDayHour)
                 monthlyWage += dailyWage
                 println("Today employee's wage is $dailyWage")
             } else {
                 val fullDayHour: Int = 8
                 println("\nFull Time Employee Is Present")
-                var dailywage = calculateDailyWage(WAGE_PER_HOUR, fullDayHour)
-                monthlyWage += dailywage
-                println("Today employee's wage is $dailywage")
+                val dailyWage = calculateDailyWage(WAGE_PER_HOUR, fullDayHour)
+                monthlyWage += dailyWage
+                hours += fullDayHour
+                println("Today employee's wage is $dailyWage")
             }
             days += 1;
         }
-        println("The Total wage of Employee for a month is $monthlyWage")
+        println("The Total wage of Employee for a month is $monthlyWage and total worked hours is $hours")
     }
 
     private fun calculateDailyWage(wagePerHour: Int, fullDayHour: Int): Int {
@@ -59,35 +63,39 @@ class PartTimeEmployee(WAGE_PER_HOUR: Int, FULL_DAY_HOUR: Int, NO_OF_DAYS: Int) 
     init {
         val isPresent: Int = 1
         val isAbsent: Int = 0
+        val totalHours = 50
+
         println("\nPart Time Employee Wage \n\nThe daily wage of employee is ${calculateDailyWage(WAGE_PER_HOUR, FULL_DAY_HOUR)}")
-        calculateMontlyWage(isAbsent, isPresent, WAGE_PER_HOUR, NO_OF_DAYS)
+        calculateMontlyWage(isAbsent, isPresent, WAGE_PER_HOUR, NO_OF_DAYS, totalHours)
     }
 
     private fun checkPresentOrAbsent(isAbsent: Int, isPresent: Int): Int {
         return (isAbsent..isPresent).random()
     }
 
-    private fun calculateMontlyWage(isAbsent: Int, isPresent: Int, WAGE_PER_HOUR: Int, NO_OF_DAYS: Int) {
+    private fun calculateMontlyWage(isAbsent: Int, isPresent: Int, WAGE_PER_HOUR: Int, NO_OF_DAYS: Int, totalHours: Int) {
         var days: Int = 1
         var monthlyWage: Int = 0
-        while (days <= NO_OF_DAYS) {
+        var hours: Int = 0
+        while (days <= NO_OF_DAYS && hours <= totalHours ) {
             println("\nDay $days:")
             if (checkPresentOrAbsent(isAbsent, isPresent) == 0) {
                 val fullDayHour: Int = 0
                 println("\nPart Time Employee Is Absent")
-                var dailyWage = calculateDailyWage(WAGE_PER_HOUR, fullDayHour)
+                val dailyWage = calculateDailyWage(WAGE_PER_HOUR, fullDayHour)
                 monthlyWage += dailyWage
                 println("Today employee's wage is $dailyWage")
             } else {
                 val fullDayHour: Int = 4
                 println("\nPart Time Employee Is Present")
-                var dailywage = calculateDailyWage(WAGE_PER_HOUR, fullDayHour)
+                val dailywage = calculateDailyWage(WAGE_PER_HOUR, fullDayHour)
                 monthlyWage += dailywage
                 println("Today employee's wage is $dailywage")
+                hours += fullDayHour
             }
             days += 1;
         }
-        println("\nThe Total wage of Employee for a month is $monthlyWage")
+        println("\nThe Total wage of Employee for a month is $monthlyWage and total worked hours is $hours")
     }
 
     private fun calculateDailyWage(wagePerHour: Int, fullDayHour: Int): Int {
